@@ -35,6 +35,15 @@
 
 ---
 
+### 插件下载
+
+下载链接：<a href="https://raw.githubusercontent.com/xlzd/zhfishhook/master/release/zhfishhook.crx" target="_blank">https://raw.githubusercontent.com/xlzd/zhfishhook/master/release/zhfishhook.crx</a>
+
+安装请参考之前的知乎专栏：<a href="https://zhuanlan.zhihu.com/p/22933208?refer=xlz-d" target="_blank">如何优雅地阅读钓鱼问题 - xlzd杂谈 - 知乎专栏</a>
+
+
+---
+
 后续功能：
 
  - 自动播放模式
