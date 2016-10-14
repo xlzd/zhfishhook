@@ -1,6 +1,6 @@
 {
   "name": "知乎鱼钩",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "知乎鱼钩：钓鱼问题好帮手",
   "background": {
     "scripts": ["background.js"],
