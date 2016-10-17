@@ -1,11 +1,23 @@
+
+
+// 获取图片的 url
 function load_img_urls() {
     var imgs = []
+
+    // 为了简化用$("控件id")来代替document.getElementById("控件id")
     imgs = $('.zm-item-answer').find('.lazy')
     console.log('imgs count : ' + imgs.length)
 
     return imgs.map(function(){return $(this).data($(this).data('original') != undefined ? 'original' : 'actualsrc')})
 }
 
+
+function ale(var1)
+{
+    alert("这个问题下面有鱼上钩啦"+var1);
+}
+
+// 建立图片式的 html 页面
 function build_img_html(img_urls) {
     var img_html = []
 
@@ -17,6 +29,9 @@ function build_img_html(img_urls) {
 }
 
 
+
+// 页面加载完成后开始运行do stuff when DOM is ready　中的语句!
+// 具体不懂的可以参考这里 http://www.cnblogs.com/MikeChen/articles/1795526.html
 $(document).ready(function() {
     var SHOW_BTN_TEMPLATE = '<div class="show-btn"></div>'
     var CONTAINER_TEMPLATE = '<div><div class="zh-fishhook"><div class="page-index">第 <span class="current"></span> 张，共 <span class="total"></span> 张</div><div class="img-container" data-index="0"></div><div class="exit"></div><div class="paginator"><div class="prev pager"></div><div class="next pager"></div></div></div><div class="background"></div></div>'
@@ -29,11 +44,29 @@ $(document).ready(function() {
     var DURATION = 500
     var SHOWING = false
 
+    // 函数调用
     var img_urls = load_img_urls()
 
-    if (img_urls.length !== 0){
-        $(SHOW_BTN_TEMPLATE).appendTo($('body'));
-    }
+    var TITLE = document.title
+    
+
+    // 用正则表达式来判断一下是否有鱼
+    var patt1 = new RegExp("女")
+    var patt2 = new RegExp("胸")
+    var patt3 = new RegExp("腿")
+    var patt4 = new RegExp("身材")
+     
+     
+     if(patt1.test(TITLE) || patt2.test(TITLE) || patt3.test(TITLE) || patt4.test(TITLE)){
+
+     	if (img_urls.length !== 0){
+
+    	ale(TITLE)
+           $(SHOW_BTN_TEMPLATE).appendTo($('body'));
+        }
+     }
+
+    
 
     $(CONTAINER_TEMPLATE).appendTo($('body'));
 
@@ -48,24 +81,36 @@ $(document).ready(function() {
     var total = $('.total');
     CURRENT = $('.current');
 
+    
+    // 显示总共的图片数量
     total.text(IMG_COUNT);
+
     CURRENT.text(IMG_COUNT !== 0 ? '1' : '0');
 
     PREV_BUTTON = $('.prev')
     NEXT_BUTTON = $('.next')
 
+
+
     function init() {
         SHOWING = true
+
+        // 保留了图片的 url 
         var img_urls = load_img_urls()
         $(CONTAINER_TEMPLATE).appendTo($('body'));
 
         IMG_CONTAINER = $('.img-container')
         IMG_CONTAINER[0].innerHTML = ''
+
+        // urls 传入这个函数
         $(build_img_html(img_urls)).appendTo(IMG_CONTAINER);
 
         IMG_COUNT = img_urls.length;
 
         var total = $('.total');
+
+
+        // 显示图片的总数目
         total.text(IMG_COUNT);
 
         if(IMG_COUNT === 0) {
@@ -77,6 +122,7 @@ $(document).ready(function() {
         }
     }
 
+    // 前一张
     function prev(){
         var now_pos = parseInt(IMG_CONTAINER.data('index'));
         var before_pos = parseInt(CURRENT.text());
@@ -93,6 +139,7 @@ $(document).ready(function() {
         NEXT_BUTTON.fadeIn(DURATION);
     }
 
+    // 后一张
     function next() {
         var now_pos = parseInt(IMG_CONTAINER.data('index'));
         var before_pos = parseInt(CURRENT.text());
@@ -111,6 +158,7 @@ $(document).ready(function() {
         PREV_BUTTON.fadeIn(DURATION);
     }
 
+    // 快捷键
     function on_key_pressed(e) {
         console.log(e.which)
         if(e.which === 39 || e.which === 40) {
